@@ -32,13 +32,13 @@ model.add(Flatten())              # i need to understand all this
 print(x.shape)
 model.add(Dense(512,input_shape = x.shape[1:],activation = 'relu'))
 
-model.add(Dense(512,activation = 'relu'))
+model.add(Dense(256,activation = 'relu'))
 
 model.add(Dense(5,activation = 'softmax'))
 
 model.compile(optimizer = 'adam' , loss = 'sparse_categorical_crossentropy', metrics = ['accuracy'])
 
-model.fit(x,y,epochs = 45, validation_split = 0.1,batch_size = 32, callbacks=[tenserboard])
+model.fit(x,y,epochs = 30, validation_split = 0.1,batch_size = 32 )
 
 model.save_weights('model_weights.h5')
 model.save('model_keras.h5')

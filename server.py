@@ -4,9 +4,15 @@ from PIL import Image,ImageDraw
 import time
 import matplotlib.pyplot as plt
 import cv2
+import numpy as np
+import tensorflow as tf
+from tensorflow import keras
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
+
+DIRECTORY = "/home/harsh/AndroidStudioProjects/Foodimagerecognization/food-image-classifier"
+model = tf.keras.models.load_model(DIRECTORY + '/model_keras_30.h5')
 
 @app.route('/detect', methods = ['GET','POST'])
 def detect():
@@ -17,11 +23,29 @@ def detect():
 		with open(path,'wb') as f:                      # find sol for this
 			f.write(file)
 		
-		frame = cv2.imread("uploads/detect.jpeg")
-		plt.imshow(frame)
-		plt.show()
+		img_array =[]
+		data = cv2.imread("uploads/detect.jpeg")
+		img_array.append(data)
+		img_array = np.array(img_array)
+		img_array = img_array/255
+		# plt.imshow(frame)
+		# plt.show()
+		output = model.predict_classes(img_array,verbose = 2)
+		print(output)
+		if output[0] == 0:
+			ans = 'Donut'
+		if output[0] == 1:
+			ans = "French-Fries"
+		if output[0] == 2:
+			ans = "Fried Rice"
+		if output[0] == 3:
+			ans = "Ice-Cream"
+		if output[0] == 4:
+			ans = "Pizza"
+
+		print(ans)
 		print('file uploaded for detection')
-		return jsonify(result = 'ans')
+		return jsonify(result = ans)
 
 	return jsonify(result = 'get request')
 
