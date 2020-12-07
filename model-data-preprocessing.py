@@ -7,7 +7,7 @@ import pickle
 
 DIRECTIORY = "/home/harsh/AndroidStudioProjects/Foodimagerecognization/food-image-classifier/dataset"
 
-CATEGORIES = ['donuts','french_fries','fried_rice','ice_cream','pizza']
+CATEGORIES = ['chocolate_cake','donuts','french_fries','fried_rice','hot_dog']
 
 IMG_SIZE = 300
 

@@ -12,7 +12,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
 
 DIRECTORY = "/home/harsh/AndroidStudioProjects/Foodimagerecognization/food-image-classifier"
-model = tf.keras.models.load_model(DIRECTORY + '/model_keras_30.h5')
+model = tf.keras.models.load_model(DIRECTORY + '/model_keras_18.h5')
 
 @app.route('/detect', methods = ['GET','POST'])
 def detect():
@@ -33,15 +33,15 @@ def detect():
 		output = model.predict_classes(img_array,verbose = 2)
 		print(output)
 		if output[0] == 0:
-			ans = 'Donut'
+			ans = 'Chocolate Cake'
 		if output[0] == 1:
-			ans = "French-Fries"
+			ans = "Donut"
 		if output[0] == 2:
-			ans = "Fried Rice"
+			ans = "French Fries"
 		if output[0] == 3:
-			ans = "Ice-Cream"
+			ans = "Fried Rice"
 		if output[0] == 4:
-			ans = "Pizza"
+			ans = "Hotdog"
 
 		print(ans)
 		print('file uploaded for detection')

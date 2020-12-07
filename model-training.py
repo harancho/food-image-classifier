@@ -38,7 +38,7 @@ model.add(Dense(5,activation = 'softmax'))
 
 model.compile(optimizer = 'adam' , loss = 'sparse_categorical_crossentropy', metrics = ['accuracy'])
 
-model.fit(x,y,epochs = 30, validation_split = 0.1,batch_size = 32 )
+model.fit(x,y,epochs = 18, validation_split = 0.1,batch_size = 32 )
 
 model.save_weights('model_weights.h5')
 model.save('model_keras.h5')
